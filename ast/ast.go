@@ -30,13 +30,13 @@ func (p *Program) TokenLiteral() string {
 }
 
 func (p *Program) String() string {
-    var str string
-    for _, stmt := range p.Statements {
-        str += stmt.TokenLiteral()
-        str += "\n"
-    }
+	var str string
+	for _, stmt := range p.Statements {
+		str += stmt.TokenLiteral()
+		str += "\n"
+	}
 
-    return str
+	return str
 }
 
 type LetStatement struct {
@@ -57,3 +57,11 @@ type Identifier struct {
 
 func (i *Identifier) expressionNode()      {}
 func (i *Identifier) TokenLiteral() string { return i.Token.Literal }
+
+type ReturnStatement struct {
+	Token       token.Token // the token.RETURN Token
+	ReturnValue Expression
+}
+
+func (rs *ReturnStatement) statementNode()       {}
+func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Literal }
